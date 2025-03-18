@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import '../models/todo.dart';
+import '../services/hive_service.dart';
 
 class TodoProvider with ChangeNotifier {
-  List<Todo> _todos = [];
+  final HiveService _hiveService = HiveService();
 
-  List<Todo> get todos => _todos;
+  List<Todo> get todos => _hiveService.todoBox.values.toList();
 
   void addTodo(Todo todo) {
-    _todos.add(todo);
+    _hiveService.todoBox.add(todo);
     notifyListeners();
   }
 
   void updateTodo(int id, String newTitle) {
-    final index = _todos.indexWhere((todo) => todo.id == id);
-    if (index != -1) {
-      _todos[index].title = newTitle;
-      notifyListeners();
-    }
+    final todo = _hiveService.todoBox.values.firstWhere((todo) => todo.id == id);
+    todo.title = newTitle;
+    todo.save();
+    notifyListeners();
   }
 
   void deleteTodo(int id) {
-    _todos.removeWhere((todo) => todo.id == id);
+    final todo = _hiveService.todoBox.values.firstWhere((todo) => todo.id == id);
+    todo.delete();
     notifyListeners();
   }
 
   void toggleTodoStatus(int id) {
-    final index = _todos.indexWhere((todo) => todo.id == id);
-    if (index != -1) {
-      _todos[index].isCompleted = !_todos[index].isCompleted;
-      notifyListeners();
-    }
+    final todo = _hiveService.todoBox.values.firstWhere((todo) => todo.id == id);
+    todo.isCompleted = !todo.isCompleted;
+    todo.save();
+    notifyListeners();
   }
 }

@@ -16,29 +16,39 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Checkbox(
-        value: todo.isCompleted,
-        onChanged: (value) => onToggle(),
+    return Card(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
       ),
-      title: Text(
-        todo.title,
-        style: TextStyle(
-          decoration: todo.isCompleted ? TextDecoration.lineThrough : null,
+      elevation: 2,
+      child: ListTile(
+        leading: Checkbox(
+          value: todo.isCompleted,
+          onChanged: (value) => onToggle(),
+          activeColor: Color(0xFF80DEEA), // Aqua
         ),
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: onEdit,
+        title: Text(
+          todo.title,
+          style: TextStyle(
+            fontFamily: 'Quicksand',
+            decoration: todo.isCompleted ? TextDecoration.lineThrough : null,
+            color: todo.isCompleted ? Colors.black54 : Colors.black87,
           ),
-          IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: onDelete,
-          ),
-        ],
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: Icon(Icons.edit, color: Color(0xFF80DEEA)), // Aqua
+              onPressed: onEdit,
+            ),
+            IconButton(
+              icon: Icon(Icons.delete, color: Colors.red[300]),
+              onPressed: onDelete,
+            ),
+          ],
+        ),
       ),
     );
   }

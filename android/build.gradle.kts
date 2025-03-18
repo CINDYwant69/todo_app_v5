@@ -1,21 +1,25 @@
+// Repositories configuration
 allprojects {
     repositories {
         google()
         mavenCentral()
+        // jcenter() // Uncomment only if necessary, as it's deprecated.
     }
 }
 
-val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../../build").get()
-rootProject.layout.buildDirectory.value(newBuildDir)
+// Custom build directory setup
+val newBuildDir = rootProject.layout.buildDirectory.dir("../../build")
+rootProject.layout.buildDirectory.set(newBuildDir.get())
 
 subprojects {
-    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
-    project.layout.buildDirectory.value(newSubprojectBuildDir)
-}
-subprojects {
-    project.evaluationDependsOn(":app")
+    // Set custom build directory for each subproject
+    layout.buildDirectory.set(newBuildDir.get().dir(name))
+
+    // Ensure 'app' project is evaluated first if needed
+    evaluationDependsOn(":app")
 }
 
+// Clean task to delete the custom build directory
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
