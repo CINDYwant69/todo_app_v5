@@ -14,8 +14,8 @@ class ThemeProvider with ChangeNotifier {
 
   static final ThemeData _lightTheme = ThemeData(
     primarySwatch: Colors.blue,
-    scaffoldBackgroundColor: Color(0xFFE0F7FA), // Light Cyan
-    appBarTheme: AppBarTheme(
+    scaffoldBackgroundColor: const Color(0xFFE0F7FA), // Light Cyan
+    appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFF80DEEA), // Aqua
       elevation: 0,
       titleTextStyle: TextStyle(
@@ -25,7 +25,7 @@ class ThemeProvider with ChangeNotifier {
         color: Colors.white,
       ),
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       bodyLarge: TextStyle(
         fontFamily: 'Quicksand',
         fontSize: 16,
@@ -41,8 +41,8 @@ class ThemeProvider with ChangeNotifier {
 
   static final ThemeData _darkTheme = ThemeData(
     primarySwatch: Colors.blue,
-    scaffoldBackgroundColor: Color(0xFF121212), // Dark background
-    appBarTheme: AppBarTheme(
+    scaffoldBackgroundColor: const Color(0xFF121212), // Dark background
+    appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFF1E1E1E), // Dark app bar
       elevation: 0,
       titleTextStyle: TextStyle(
@@ -52,7 +52,7 @@ class ThemeProvider with ChangeNotifier {
         color: Colors.white,
       ),
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       bodyLarge: TextStyle(
         fontFamily: 'Quicksand',
         fontSize: 16,

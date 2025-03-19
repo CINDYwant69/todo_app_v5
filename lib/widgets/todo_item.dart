@@ -7,7 +7,8 @@ class TodoItem extends StatelessWidget {
   final VoidCallback onEdit;
   final VoidCallback onDelete;
 
-  TodoItem({
+  const TodoItem({
+    super.key,
     required this.todo,
     required this.onToggle,
     required this.onEdit,
@@ -17,16 +18,14 @@ class TodoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 2,
       child: ListTile(
         leading: Checkbox(
           value: todo.isCompleted,
           onChanged: (value) => onToggle(),
-          activeColor: Color(0xFF80DEEA), // Aqua
+          activeColor: const Color(0xFF80DEEA), // Aqua
         ),
         title: Text(
           todo.title,
@@ -40,7 +39,7 @@ class TodoItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              icon: Icon(Icons.edit, color: Color(0xFF80DEEA)), // Aqua
+              icon: const Icon(Icons.edit, color: Color(0xFF80DEEA)), // Aqua
               onPressed: onEdit,
             ),
             IconButton(

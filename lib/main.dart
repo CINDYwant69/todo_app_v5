@@ -22,12 +22,15 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    const MaterialApp(debugShowCheckedModeBanner: false);
     return AnimatedTheme(
       data: themeProvider.themeData,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       child: MaterialApp(
         title: 'To-Do',
         theme: themeProvider.themeData,

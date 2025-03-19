@@ -1,4 +1,3 @@
-// lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/todo.dart';
@@ -6,18 +5,20 @@ import '../providers/todo_provider.dart';
 import '../widgets/category_chip.dart';
 import '../utils/animations.dart';
 import '../widgets/todo_item.dart';
-import '../widgets/search_bar.dart'; // Use the correct import
+import '../widgets/search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final todoProvider = Provider.of<TodoProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('To-Do'),
+        title: const Text('To-Do'),
         actions: [
           IconButton(
-            icon: Icon(Icons.filter_list),
+            icon: const Icon(Icons.filter_list),
             onPressed: () {
               // Open filter dialog
             },
@@ -26,16 +27,18 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SearchBar(), // Remove the onSearch parameter
+          SearchBar(
+            // Add search functionality here if supported by the SearchBar widget
+          ),
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               itemCount: todoProvider.todos.length,
               itemBuilder: (context, index) {
                 final todo = todoProvider.todos[index];
                 return TaskAnimations.slideTransition(
                   AnimationController(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     vsync: Scaffold.of(context),
                   ),
                   TodoItem(
@@ -52,7 +55,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addTodo(context),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -96,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ListTile(
                 title: Text(
                   'Due Date',
@@ -106,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 trailing: IconButton(
-                  icon: Icon(Icons.calendar_today),
+                  icon: const Icon(Icons.calendar_today),
                   onPressed: () async {
                     final pickedDate = await showDatePicker(
                       context: context,
@@ -145,7 +148,10 @@ class HomeScreen extends StatelessWidget {
                     dueDate: dueDate,
                     reminder: reminder,
                   );
-                  Provider.of<TodoProvider>(context, listen: false).addTodo(todo);
+                  Provider.of<TodoProvider>(
+                    context,
+                    listen: false,
+                  ).addTodo(todo);
                   Navigator.pop(context);
                 }
               },
@@ -202,7 +208,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ListTile(
                 title: Text(
                   'Due Date',
@@ -212,7 +218,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 trailing: IconButton(
-                  icon: Icon(Icons.calendar_today),
+                  icon: const Icon(Icons.calendar_today),
                   onPressed: () async {
                     final pickedDate = await showDatePicker(
                       context: context,
